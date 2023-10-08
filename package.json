@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "postbuild": "mv dist/assets/* dist/ && rmdir dist/assets",
     "pages": "git subtree push --prefix dist origin gh-pages",
     "dev": "vite",
     "build": "vite build",
