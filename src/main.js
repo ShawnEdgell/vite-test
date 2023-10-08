@@ -1,24 +1,27 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from './vite.svg'
-import { setupCounter } from './counter.js'
+import './style.css';
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const todoInput = document.getElementById('todoInput');
+const addTodoButton = document.getElementById('addTodo');
+const todoList = document.getElementById('todoList');
 
-setupCounter(document.querySelector('#counter'))
+addTodoButton.addEventListener('click', () => {
+  const inputValue = todoInput.value.trim();
+
+  if (inputValue) {
+    const li = document.createElement('li');
+    const textSpan = document.createElement('span');
+    textSpan.textContent = inputValue;
+    li.appendChild(textSpan);
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'x';
+    removeButton.className = 'removeBtn';
+    removeButton.addEventListener('click', () => {
+      todoList.removeChild(li);
+    });
+    li.appendChild(removeButton);
+
+    todoList.appendChild(li);
+    todoInput.value = '';
+  }
+});
